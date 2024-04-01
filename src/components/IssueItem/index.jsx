@@ -2,183 +2,14 @@ import React, { useState } from 'react';
 import './index.css';
 import Navbar from '../Navbar';
 
-
-// const combinedData = [
-//   {
-//     "SL No": 1,
-//     "Category": "Server Room",
-//     "Lab Name": "-",
-//     "Department": "Server Room",
-//     "Sys Config": "-",
-//     "Quantity": 1,
-//     "Invoice No": "31/03/2018",
-//     "Purchase Date": "-",
-//     "Expiry Date": "-",
-//     "Unit Price": 141750,
-//     "Total Price": 2141750
-//   },
-//   {
-//     "SL No": 2,
-//     "Category": "Server Room",
-//     "Lab Name": "-",
-//     "Department": "Server Room",
-//     "Sys Config": "-",
-//     "Quantity": 1,
-//     "Invoice No": "27/06/2011",
-//     "Purchase Date": "-",
-//     "Expiry Date": "-",
-//     "Unit Price": 675000,
-//     "Total Price": 2675000
-//   },
-//   {
-//     "SL No": 3,
-//     "Category": "Desktops",
-//     "Lab Name": "-",
-//     "Department": "Desktops",
-//     "Sys Config": "Intel 12th Gen. Core i7 Processor, 16GB DDR4 RAM, 512GB Solid State Drive, Intel UHD Graphics 770, 19.5\" LED Monitor.",
-//     "Quantity": 32,
-//     "Invoice No": "$3700290/22-23 & 13/01/2023",
-//     "Purchase Date": "-",
-//     "Expiry Date": "-",
-//     "Unit Price": 59000,
-//     "Total Price": 1888000
-//   },
-//   {
-//     "SL No": 4,
-//     "Category": "Desktops",
-//     "Lab Name": "-",
-//     "Department": "Desktops",
-//     "Sys Config": "Intel 12th Gen. Core i7 Processor, 16GB DDR4 RAM, 512GB Solid State Drive, Intel UHD Graphics 770, 19.5\" LED Monitor.",
-//     "Quantity": 32,
-//     "Invoice No": "$3700290/22-23 & 13/01/2023",
-//     "Purchase Date": "-",
-//     "Expiry Date": "-",
-//     "Unit Price": 59000,
-//     "Total Price": 1888000
-//   },
-//   {
-//     "SL No": 5,
-//     "Category": "Desktops",
-//     "Lab Name": "-",
-//     "Department": "Desktops",
-//     "Sys Config": "Intel 12th Gen. Core i7 Processor, 16GB DDR4 RAM, 512GB Solid State Drive, Intel UHD Graphics 770, 19.5\" LED Monitor.",
-//     "Quantity": 39,
-//     "Invoice No": "$3700290/22-23 & 13/01/2023",
-//     "Purchase Date": "-",
-//     "Expiry Date": "-",
-//     "Unit Price": 59000,
-//     "Total Price": 2301000
-//   },
-//   {
-//     "SL No": 6,
-//     "Category": "Desktops",
-//     "Lab Name": "-",
-//     "Department": "Desktops",
-//     "Sys Config": "Intel 12th Gen. Core i7 Processor, 16GB DDR4 RAM, 512GB Solid State Drive, Intel UHD Graphics 770, 19.5\" LED Monitor.",
-//     "Quantity": 1,
-//     "Invoice No": "$3700290/22-23 & 13/01/2023",
-//     "Purchase Date": "-",
-//     "Expiry Date": "-",
-//     "Unit Price": 59000,
-//     "Total Price": 1888000
-//   },
-//   {
-//     "SL No": 7,
-//     "Category": "Desktops",
-//     "Lab Name": "-",
-//     "Department": "Desktops",
-//     "Sys Config": "HP PRO AMD Athlon(tm) II B.28 3.4GHz, 2GB RAM Processor",
-//     "Quantity": 2,
-//     "Invoice No": "7032 06/03/2009",
-//     "Purchase Date": "-",
-//     "Expiry Date": "-",
-//     "Unit Price": 29900,
-//     "Total Price": 59800
-//   },
-//   {
-//     "SL No": 8,
-//     "Category": "Desktops",
-//     "Lab Name": "-",
-//     "Department": "Desktops",
-//     "Sys Config": "Intel Core i7 7700 processor, 3.2GHz, 16GB RAM Desktops.",
-//     "Quantity": 1,
-//     "Invoice No": "VIZ-1549 29/9/2018",
-//     "Purchase Date": "-",
-//     "Expiry Date": "-",
-//     "Unit Price": 55500,
-//     "Total Price": 55500
-//   },
-//   {
-//     "SL No": 9,
-//     "Category": "Desktops",
-//     "Lab Name": "-",
-//     "Department": "Desktops",
-//     "Sys Config": "Intel Core i3 3210 processor, 3.4 GHz, 4GB RAM desktops.",
-//     "Quantity": 1,
-//     "Invoice No": "HO-02 29/03/2011",
-//     "Purchase Date": "-",
-//     "Expiry Date": "-",
-//     "Unit Price": 25850,
-//     "Total Price": 25850
-//   },
-//   {
-//     "SL No": 10,
-//     "Category": "Pen Tablets",
-//     "Lab Name": "-",
-//     "Department": "Pen Tablets",
-//     "Sys Config": "-",
-//     "Quantity": 4,
-//     "Invoice No": "HO-OUT-80 & 31/01/2022",
-//     "Purchase Date": "-",
-//     "Expiry Date": "-",
-//     "Unit Price": 5841,
-//     "Total Price": 23364
-//   },
-//   {
-//     "SL No": 11,
-//     "Category": "AC unit",
-//     "Lab Name": "-",
-//     "Department": "AC unit",
-//     "Sys Config": "-",
-//     "Quantity": 1,
-//     "Invoice No": "VJA2122-250 & 28/07/2021",
-//     "Purchase Date": "-",
-//     "Expiry Date": "-",
-//     "Unit Price": 36700,
-//     "Total Price": 36700
-//   },
-//   {
-//     "SL No": 12,
-//     "Category": "Mic",
-//     "Lab Name": "-",
-//     "Department": "Mic",
-//     "Sys Config": "-",
-//     "Quantity": 1,
-//     "Invoice No": "STV/19-20/11371",
-//     "Purchase Date": "-",
-//     "Expiry Date": "-",
-//     "Unit Price": 3644,
-//     "Total Price": 4300
-//   },
-//   {
-//     "SL No": 13,
-//     "Category": "Projectors",
-//     "Lab Name": "-",
-//     "Department": "Projectors",
-//     "Sys Config": "-",
-//     "Quantity": 6,
-//     "Invoice No": "CORPOUT",
-//     "Purchase Date": "-",
-//     "Expiry Date": "-",
-//     "Unit Price": "-",
-//     "Total Price":"-"}]
-
-
-
 const IssueItem = () => {
   const [formData, setFormData] = useState({
-    departmentName: '',
-    labName: ''
+    category: '',
+    itemName: '',
+    departmentName: 'CSE',
+    labName: '',
+    year: '',
+    monthName: ''
   });
 
   const handleChange = (e) => {
@@ -189,54 +20,77 @@ const IssueItem = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+    
+    try {
+      const response = await fetch('http://localhost:3030/api/issue', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Issue created successfully:', data);
+        alert('Issue created successfully');
+      } else {
+        console.error('Failed to create issue:', response.statusText);
+        alert('Failed to create issue');
+      }
+    } catch (error) {
+      console.error('Error creating issue:', error);
+      alert('Error creating issue');
+    }
   };
 
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <img
-              src="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg"
-              alt="BEC"
-              className="college-logo"
-            />
-    <div className="task-container-add">
-      <form className="add-dept" onSubmit={handleSubmit}>
-      <div className="create-task-form-input">
-          <label htmlFor="labName">Category :</label>
-          <input type="text" id="category" name="category" value={formData.labName} onChange={handleChange} className="task-input-field" />
-        </div>
-      <div className="create-task-form-input">
-          <label htmlFor="labName">Item Name:</label>
-          <input type="text" id="itemName" name="itemName" value={formData.labName} onChange={handleChange} className="task-input-field" />
-        </div>
-        <div className="create-task-form-input">
-          <label htmlFor="departmentName">Select The Department Name:</label>
-          <select id="departmentName" >
-            <option value="Computer Science and Engineering" className="task-input-field">Computer Science and Engineering</option>
-            <option value="Electrical Engineering" className="task-input-field">Electrical Engineering</option>
-            <option value="Mechanical Engineering" className="task-input-field">Mechanical Engineering</option>
-            <option value="Civil Engineering" className="task-input-field">Civil Engineering</option>
-            <option value="Electronics and Communication Engineering" className="task-input-field">Electronics and Communication Engineering</option>
-            <option value="Aerospace Engineering" className="task-input-field">Aerospace Engineering</option>
-            <option value="Chemical Engineering" className="task-input-field">Chemical Engineering</option>
-            <option value="Biotechnology Engineering" className="task-input-field">Biotechnology Engineering</option>
-            <option value="Information Technology" className="task-input-field">Information Technology</option>
-            <option value="Environmental Engineering" className="task-input-field">Environmental Engineering</option>
-          </select>
-
-        </div>
-        <div className="create-task-form-input">
-          <label htmlFor="labName">Lab Name:</label>
-          <input type="text" id="labName" name="labName" value={formData.labName} onChange={handleChange} className="task-input-field" />
-        </div>
-        <button type="submit" className="add-dept-btn">Issue</button>
-      </form>
-      
-    </div>
+        src="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg"
+        alt="BEC"
+        className="college-logo"
+      />
+      <div className="task-container-add">
+        <form className="add-dept" onSubmit={handleSubmit}>
+          <div className="create-task-form-input">
+            <label htmlFor="category">Category :</label>
+            <input type="text" id="category" name="category" value={formData.category} onChange={handleChange} className="task-input-field" />
+          </div>
+          <div className="create-task-form-input">
+            <label htmlFor="itemName">Item Name:</label>
+            <input type="text" id="itemName" name="itemName" value={formData.itemName} onChange={handleChange} className="task-input-field" />
+          </div>
+          <div className="create-task-form-input">
+            <label htmlFor="departmentName">Select The Department Name:</label>
+            <select id="departmentName" className="task-input-field" onChange={handleChange} name="departmentName" value={formData.departmentName}>
+              <option value="CSE" className="task-input-field">CSE</option>
+              <option value="EEE" className="task-input-field">EEE</option>
+              <option value="ME" className="task-input-field">ME</option>
+              <option value="CE" className="task-input-field">CE</option>
+              <option value="ECE" className="task-input-field">ECE</option>
+              <option value="AE" className="task-input-field">AE</option>
+              <option value="IT" className="task-input-field">IT</option>
+            </select>
+          </div>
+          <div className="create-task-form-input">
+            <label htmlFor="labName">Lab Name:</label>
+            <input type="text" id="labName" name="labName" value={formData.labName} onChange={handleChange} className="task-input-field" />
+          </div>
+          <div className="create-task-form-input">
+            <label htmlFor="year">Year:</label>
+            <input type="text" id="year" name="year" value={formData.year} onChange={handleChange} className="task-input-field" />
+          </div>
+          <div className="create-task-form-input">
+            <label htmlFor="monthName">Month Name:</label>
+            <input type="text" id="monthName" name="monthName" value={formData.monthName} onChange={handleChange} className="task-input-field" />
+          </div>
+          <button type="submit" className="add-dept-btn">Issue</button>
+        </form>
+      </div>
     </>
   );
 };

@@ -1,84 +1,80 @@
-import React, { useState } from "react";
-import Chart from "react-apexcharts";
-import { Doughnut } from "react-chartjs-2";
-import "./index.css";
+import React, { useEffect, useRef } from 'react';
+import Chart from 'chart.js/auto';
 
-export const data = {
-  labels: [
-    "ECE", // Electronics & Communications Engineering
-    "EIE", // Electronics & Instrumentation Engineering
-    "EEE", // Electrical & Electronics Engineering
-    "CSE", // Computer Science & Engineering
-    "IT",  // Information Technology
-    "ME",  // Mechanical Engineering
-    "ChemE", // Chemical Engineering
-    "CE",  // Civil Engineering
-    "Chem", // Department of Chemistry
-    "Physics", // Department of Physics
-    "MCA"  // Department of MCA
-  ],
-  datasets: [
-    {
-      label: "# of Purchases",
-      data: [0, 1, 5, 8, 9, 15, 10, 9, 8, 3, 2],
-      backgroundColor: [
-        "rgba(255, 99, 132, 0.2)",
-        "rgba(54, 162, 235, 0.2)",
-        "rgba(255, 206, 86, 0.2)",
-        "rgba(75, 192, 192, 0.2)",
-        "rgba(153, 102, 255, 0.2)",
-        "rgba(255, 159, 64, 0.2)",
-      ],
-      borderColor: [
-        "rgba(255, 99, 132, 1)",
-        "rgba(54, 162, 235, 1)",
-        "rgba(255, 206, 86, 1)",
-        "rgba(75, 192, 192, 1)",
-        "rgba(153, 102, 255, 1)",
-        "rgba(255, 159, 64, 1)",
-      ],
-      borderWidth: 1,
-    },
-  ],
-};
+const HomeCharts = ({ departmentData }) => {
+  const pieChartRef = useRef(null);
+  const barChartRef = useRef(null);
+  let pieChart = null;
+  let barChart = null;
 
-function HomeCharts() {
-  const [chart, setChart] = useState({
-    options: {
-      chart: {
-        id: "basic-bar",
-      },
-      xaxis: {
-        categories: [
-          "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-          "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
-        ],
-      },
-    },
-    series: [
-      {
-        name: "Monthly Sales Amount",
-        data: [10, 20, 40, 50, 60, 20, 10, 35, 45, 70, 25, 70],
-      },
-    ],
-  });
+  useEffect(() => {
+    if (departmentData) {
+      const departments = Object.keys(departmentData);
+      const itemsPerDepartment = Object.values(departmentData);
+
+      // Destroy previous charts
+      if (pieChart) pieChart.destroy();
+      if (barChart) barChart.destroy();
+
+      // Pie Chart
+      pieChart = new Chart(pieChartRef.current, {
+        type: 'pie',
+        data: {
+          labels: departments,
+          datasets: [
+            {
+              label: 'Items per Department',
+              data: itemsPerDepartment,
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.5)',
+                'rgba(54, 162, 235, 0.5)',
+                'rgba(255, 206, 86, 0.5)',
+                'rgba(75, 192, 192, 0.5)',
+                'rgba(153, 102, 255, 0.5)',
+                'rgba(255, 159, 64, 0.5)',
+              ],
+            },
+          ],
+        },
+      });
+
+      // Bar Graph
+      barChart = new Chart(barChartRef.current, {
+        type: 'bar',
+        data: {
+          labels: departments,
+          datasets: [
+            {
+              label: 'Items per Department',
+              data: itemsPerDepartment,
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.5)',
+                'rgba(54, 162, 235, 0.5)',
+                'rgba(255, 206, 86, 0.5)',
+                'rgba(75, 192, 192, 0.5)',
+                'rgba(153, 102, 255, 0.5)',
+                'rgba(255, 159, 64, 0.5)',
+              ],
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    }
+  }, [departmentData]);
 
   return (
-    <div className="graphs-container">
-      <div>
-        <h1>New Inventory Purchases</h1>
-        <Chart
-          options={chart.options}
-          series={chart.series}
-          type="bar"
-          width="500"
-        />
-      </div>
-      <div>
-        <Doughnut data={data} />
-      </div>
+    <div>
+      <canvas ref={pieChartRef}></canvas>
+      <canvas ref={barChartRef}></canvas>
     </div>
   );
-}
+};
 
 export default HomeCharts;

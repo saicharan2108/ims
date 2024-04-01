@@ -245,6 +245,7 @@
     align-self: center;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
   }
   
   .task-error-msg {
@@ -271,4 +272,16 @@
     width:90%;
     margin-left:140px;
 
+  }
+
+  .add-inventory-items-container{
+    display: flex;
+    flex-direction: column;
+    margin-left:105px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+
+  .add-items-main-container{
+    display: flex;
   }

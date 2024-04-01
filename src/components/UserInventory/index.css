@@ -3,44 +3,30 @@
   /*  background-color: rgb(226, 244, 255); */
 }
 
-@media screen and (min-width: 768px) {
-  .home-container {
-    display: flex;
-  }
-}
-.college-logo{
-  width:100%
-}
-
 .home-main {
-  padding: 25px;
-  padding-top:0px;
+  padding: 5px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 15px;
   background-color: rgb(255, 255, 255);
   position: relative;
   height: 100%;
-  margin-left: 275px !important;
   max-height: 100vh;
+  margin-right:30px;
 }
 
-@media screen and (min-width: 768px) {
-  .home-main {
-    border-top-left-radius: 45px;
-    padding: 0px;
-    padding-top: 0px;
-  }
+.home-main {
+  border-top-left-radius: 45px;
+}
 
-  .home-main::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 50px;
-    width: 50px;
-  }
+.home-main::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 50px;
+  /* z-index: -1; */
 }
 
 .greeting-msg {
@@ -58,60 +44,50 @@
 
 @keyframes wave-animation {
   0% {
-    transform: rotate(0deg);
+      transform: rotate(0deg);
   }
   10% {
-    transform: rotate(14deg);
+      transform: rotate(14deg);
   }
   20% {
-    transform: rotate(-8deg);
+      transform: rotate(-8deg);
   }
   30% {
-    transform: rotate(14deg);
+      transform: rotate(14deg);
   }
   40% {
-    transform: rotate(-4deg);
+      transform: rotate(-4deg);
   }
   50% {
-    transform: rotate(10deg);
+      transform: rotate(10deg);
   }
   60% {
-    transform: rotate(0deg);
+      transform: rotate(0deg);
   }
   100% {
-    transform: rotate(0deg);
+      transform: rotate(0deg);
   }
 }
 
 .task-list-container {
-  margin-top: 30px;
-  height: 100%;
+  margin-top: 0px;
+  min-height: 100%;
   overflow-y: auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin-top: 40px;
-  max-height: 55vh;
+  /* gap: 15px; */
+  /* margin-top: 100px; */
+  /* max-height: 55vh; */
   overflow-y: scroll;
+  padding-top:10px !important;
+  margin-bottom:20px;
+  width:100%;
+  margin-left:1px;
 }
 
-@media screen and (min-width: 390px) {
-  .task-list-container {
-    max-height: 65vh;
-  }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-  .task-list-container {
-    max-height: 70vh;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .task-list-container {
-    max-height: 60vh;
-  }
+.task-list-container {
+  max-height: 65vh;
 }
 
 .task-list-container::-webkit-scrollbar {
@@ -130,20 +106,6 @@
   /* width: 100%; */
   margin-bottom: 22px;
   min-height: 278px;
-}
-
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-  .task-card {
-    min-width: 800px;
-    border-style:solid;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .task-card {
-    max-width: 800px;
-    margin-right: 20px;
-  }
 }
 
 .task-card {
@@ -200,12 +162,12 @@
   background-color: #00d97e;
 }
 
-.high{
+.high {
   color:white;
   background-color: orangered;
 }
 
-.low{
+.low {
   color: white;
   background-color: yellowgreen;
 }
@@ -253,13 +215,6 @@
 
 .display-edit {
   opacity: 1;
-}
-
-@media screen and (min-width: 567px) {
-  .edit-popup-container {
-    top: 40px;
-    right: -30px;
-  }
 }
 
 .edit-popup-btn,
@@ -389,6 +344,111 @@
   margin-left: 10px;
 }
 
-.admin-college-logo{
+.table-header {
+  display: flex;
+  flex-direction: row;
+  border-width:0px;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  background-color: #6278f5;
+  color:white;
+  position: sticky;
+  
+}
+
+.table-column {
+  list-style-type: none;
+  border-style: solid;
+  width:108.5px;
+  border-width:0.5px;
+  text-align: center;
+  font-weight:bold;
+  padding:5px;
+}
+
+.table-row {
+  list-style-type: none;
+  width:110px;
+  border-width:1px;
+  text-align: center;
+  font-weight:normal;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  padding:5px;
+  margin-bottom:0px;
+  margin-top:0px;
+}
+
+.task-row {
+  display: flex;
+  flex-direction: row;
+  margin:0px;
+}
+
+.table-btn {
+  background-color: #6278f5;
+  border-width:0px;
+  padding:5px;
+}
+
+.edit-btn {
+  background-color: #6278f5;
+  border-width: 0px;
+  border-radius: 5px;
+  padding:7px;
+  height:25px;
+  align-self: center;
+  width: 80px;
+  color:white;
+  justify-self: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.popup-container{
+  border-style: solid;
+  border-width: 0.5px;
+  border-color:azure;
+  border-radius:7px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-self: center;
+  width:400px;
+  height:550px;
+  margin-left:-60vw;
+  background-color: aliceblue;
+  margin-top:250px;
+  margin-bottom: 250px;
+  padding:30px;
+
+}
+
+.popup-title{
+  font-family:"Montserrat", Sans-serif ;
+  font-size: 20px;
+
+}
+.popup-label{
+  font-family:"Montserrat", Sans-serif ;
+  font-size: 16px;
+  width:200px;
+}
+.popup-input{
+  width:100px;
+  padding:7px;
+  border-width:1.5px;
+  border-radius:7px;
+  outline:none;
+}
+
+.popup-label-input{
+  width: 270px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.user-i-college-logo{
   width:100%;
 }

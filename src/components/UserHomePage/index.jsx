@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import HomeCharts from "../HomeCharts";
-import Navbar from "../Navbar";
+import UserNavbar from "../UserNavbar";
 import "./index.css";
 const sampleDepartmentData = {
   'CSE': 30,
@@ -10,7 +10,7 @@ const sampleDepartmentData = {
   'Civil': 10,
 };
 
-const AdminHome = () => {
+const UserHomePage = () => {
   // const [tasks, setTasks] = useState([]);
   // const [loading, setLoading] = useState(false);
 
@@ -32,12 +32,12 @@ const AdminHome = () => {
 
   return (
     <div className="home-container">
-      <Navbar />
+      <UserNavbar />
       <div className="home-main">
         <img src="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg" alt="BEC" className="admin-college-logo" />
         <div className="greeting-container">
           <h1>
-            Welcome to Admin Home
+            Welcome to User Home Page
           </h1>
         </div>
         <div className="task-container">
@@ -50,4 +50,4 @@ const AdminHome = () => {
   );
 };
 
-export default AdminHome;
+export default UserHomePage;

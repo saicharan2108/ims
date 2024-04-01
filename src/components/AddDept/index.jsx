@@ -16,33 +16,53 @@ const AddDeptForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+
+    try {
+      const res = await fetch('http://localhost:3030/api/add/department', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        const data = await res.json(); // Parse response data
+        console.log('Department added successfully:', data);
+        alert("Department added successfully");
+      } else {
+        console.error('Error adding department:', res.statusText);
+        alert("Error adding department. Please try again.");
+      }
+    } catch (error) {
+      console.error('Error adding department:', error);
+      alert("Error adding department. Please try again.");
+    }
   };
 
   return (
     <>
       <Navbar/>
       <img
-              src="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg"
-              alt="BEC"
-              className="college-logo"
-            />
-    <div className="task-container-add">
-      <form className="add-dept" onSubmit={handleSubmit}>
-        <div className="create-task-form-input">
-          <label htmlFor="departmentName">Department Name:</label>
-          <input type="text" id="departmentName" name="departmentName" value={formData.departmentName} onChange={handleChange} className="task-input-field" />
-        </div>
-        <div className="create-task-form-input">
-          <label htmlFor="labName">Lab Name:</label>
-          <input type="text" id="labName" name="labName" value={formData.labName} onChange={handleChange} className="task-input-field" />
-        </div>
-        <button type="submit" className="add-dept-btn">Add Dept</button>
-      </form>
-    </div>
+        src="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg"
+        alt="BEC"
+        className="college-logo"
+      />
+      <div className="task-container-add">
+        <form className="add-dept" onSubmit={handleSubmit}>
+          <div className="create-task-form-input">
+            <label htmlFor="departmentName">Department Name:</label>
+            <input type="text" id="departmentName" name="departmentName" value={formData.departmentName} onChange={handleChange} className="task-input-field" />
+          </div>
+          <div className="create-task-form-input">
+            <label htmlFor="labName">Lab Name:</label>
+            <input type="text" id="labName" name="labName" value={formData.labName} onChange={handleChange} className="task-input-field" />
+          </div>
+          <button type="submit" className="add-dept-btn">Add Dept</button>
+        </form>
+      </div>
     </>
   );
 };

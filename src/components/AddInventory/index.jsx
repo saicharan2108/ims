@@ -25,17 +25,50 @@ const AddInventory = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+    try {
+      const response = await fetch('http://localhost:3030/api/inventory', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      console.log(response);
+  
+      if (response.ok){
+
+        alert("Inventory Added")
+
+      const data = await response.json();
+      console.log('Item added successfully:', data);
+      // Optionally, you can reset the form data after successful submission
+      setFormData({
+        itemName: '',
+        systemConfiguration: '',
+        quantity: '',
+        unitPrice: '',
+        invoiceNo: '',
+        purchaseDate: '',
+        expiryDate: '',
+        supplierName: '',
+        categoryName: '',
+        supplierAddress: '',
+        supplierContactNumber: ''
+      });
+    } 
+  }catch (error) {
+      console.error('Error adding item:', error.message);
+      alert('Error adding item:', error.message);
+    }
   };
+  
 
   return (
-    <>
-
-      <Navbar/>  
-    <div className="task-container-add">
+    <div className='add-items-main-container'>
+    <Navbar/>  
+    <div className="add-inventory-items-container">
     <img
               src="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg"
               alt="BEC"
@@ -91,7 +124,7 @@ const AddInventory = () => {
       </form>
     </div>
   ;
-  </>
+  </div>
   )
 
 };

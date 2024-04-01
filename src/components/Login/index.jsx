@@ -1,6 +1,6 @@
 import React from "react"
 import { motion } from "framer-motion"
-import { Link, Navigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import Cookies from "js-cookie"
 import { Oval } from "react-loader-spinner"
@@ -20,11 +20,9 @@ const Login = () => {
   } = useForm()
   const [showPassword, setShowPassword] = React.useState(false)
 
-  const token = Cookies.get("token")
+  const navigate = useNavigate()
 
-  if (token) {
-    return <Navigate replace to="/" />
-  }
+  
 
   const onSubmit = async (data) => {
     setLoading(true)
@@ -37,21 +35,24 @@ const Login = () => {
     }
 
     const response = await fetch(
-      "https://pps-atr8.onrender.com/api/login",
+      "http://localhost:3030/api/login",
       options
     )
     if (response.ok) {
       setLoading(false)
       const json = await response.json()
       console.log(json)
-      Cookies.set("token", json.token)
-      localStorage.setItem("user", JSON.stringify(json.user))
+      localStorage.setItem("user", JSON.stringify(json))
       console.log(json.user);
-      toast.success(`Welcome back ${json.user.name}!`)
+      toast.success(`Welcome back!`)
+      if (json.role === "admin") {
+        navigate("/admin")
+      }else{
+        navigate("/user-home")
+      }
 
-      setTimeout(() => {
-        return <Navigate replace to="/" />
-      }, 2000)
+      
+    
     } else {
       setLoading(false)
       const json = await response.json()
@@ -61,8 +62,8 @@ const Login = () => {
   }
 
   return (
-    <div>
-        <img src ="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg" alt="BEC" className="college-logo"/>
+    <div className="login-main-container">
+        <img src ="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg" alt="BEC" className="home-college-logo"/>
 
     <motion.div
       className="login-container"

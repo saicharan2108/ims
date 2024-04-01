@@ -223,6 +223,15 @@
   width: 200px;
   border-radius: 10px;
 }
-.college-logo{
+.home-college-logo{
   width:100%;
+  display: flex;
+  align-self: center;
+}
+
+.login-main-container{
+  display: flex;
+  flex-direction: column;
+  margin:0px !important;
+  margin-right:-50px;
 }

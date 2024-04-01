@@ -83,7 +83,7 @@
   padding-top:10px !important;
   margin-bottom:20px;
   width:100%;
-  margin-left:2px;
+  margin-left:1px;
 }
 
 .task-list-container {
@@ -394,12 +394,58 @@
   background-color: #6278f5;
   border-width: 0px;
   border-radius: 5px;
-  padding:5px;
-  height:20px;
+  padding:7px;
+  height:25px;
   align-self: center;
-  width: 50px;
+  width: 80px;
   color:white;
   justify-self: center;
   margin-left: auto;
   margin-right: auto;
+}
+
+
+.popup-container{
+  border-style: solid;
+  border-width: 0.5px;
+  border-color:azure;
+  border-radius:7px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-self: center;
+  width:400px;
+  height:550px;
+  margin-left:-60vw;
+  background-color: aliceblue;
+  margin-top:250px;
+  margin-bottom: 250px;
+  padding:30px;
+
+}
+
+.popup-title{
+  font-family:"Montserrat", Sans-serif ;
+  font-size: 20px;
+
+}
+.popup-label{
+  font-family:"Montserrat", Sans-serif ;
+  font-size: 16px;
+  width:200px;
+}
+.popup-input{
+  width:100px;
+  padding:7px;
+  border-width:1.5px;
+  border-radius:7px;
+  outline:none;
+}
+
+.popup-label-input{
+  width: 270px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
