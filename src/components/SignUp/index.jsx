@@ -3,8 +3,6 @@ import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useForm } from "react-hook-form";
-import Cookies from "js-cookie";
-
 import { Oval } from "react-loader-spinner";
 import { toast } from "react-hot-toast";
 import { RiEyeOffFill } from "react-icons/ri";
@@ -18,14 +16,11 @@ const SignUp = () => {
     username: "",
     email: "",
     password: "",
-    role: "user", // Assuming default role is 'user'
+    adminCode: "", // New field for admin access code
   });
   const navigate = useNavigate();
 
-
-
   const {
-    // register,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -42,28 +37,45 @@ const SignUp = () => {
 
   const onSubmit = async () => {
     setLoading(true);
+
+    // Determine isAdmin based on adminCode
+    let isAdmin = false;
+    if (formData.adminCode === "BEC2024ADMIN") {
+      isAdmin = true;
+    }
+
+    // Construct payload based on isAdmin
+    const payload = {
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+      role: isAdmin ? "admin" : "user",
+    };
+
+    if (!isAdmin) {
+      // If admin code is not provided, set role to "user"
+      payload.role = "user";
+    }
+
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData), // Use formData state directly here
+      body: JSON.stringify(payload),
     };
 
     const response = await fetch("http://localhost:3030/api/register", options);
     if (response.ok) {
       setLoading(false);
       const json = await response.json();
-      console.log(json.role);
       localStorage.setItem("user", JSON.stringify(json));
       toast.success("Account created successfully");
       if (json.role === "admin") {
-        navigate("/admin")
-      }else if (json.role === "user"){
-        navigate("/user-home")
+        navigate("/admin");
+      } else {
+        navigate("/user-home");
       }
-      
-     
     } else {
       setLoading(false);
       const json = await response.json();
@@ -165,18 +177,16 @@ const SignUp = () => {
               )}
             </div>
             <div className="input-container">
-              <label htmlFor="role"> Role </label>
-
-              <select
-                name="role"
-                id="role"
-                value={formData.role}
+              <input
+                type="text"
+                name="adminCode"
+                value={formData.adminCode}
                 onChange={handleChange}
-                className="select-container"
-              >
-                <option value="user">User</option>
-                <option value="admin">Admin</option>
-              </select>
+              />
+              <label htmlFor="input" className="label">
+                Admin Access Code (Optional)
+              </label>
+              <div className="underline"></div>
             </div>
             <button className="login-button sigin-btn">
               {loading ? (

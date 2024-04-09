@@ -104,7 +104,7 @@ const Navbar = () => {
             </div>
           </div>
         </UserProfileCard>
-        <LinkItem to="/">
+        <LinkItem to="/admin">
           <NavItem isActive={activeNavItem === 'home'} onClick={() => clickedNavItem('home')}>
             <HomeIcon /> Home
           </NavItem>

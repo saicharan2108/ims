@@ -3,6 +3,7 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import Navbar from "../Navbar";
 import "./index.css";
+import UserNavbar from "../UserNavbar";
 
 const UserInventory = () => {
   const [data, setData] = useState([]);
@@ -27,7 +28,7 @@ const UserInventory = () => {
 
   return (
     <div className="home-container">
-      <Navbar />
+      <UserNavbar />
       <div className="home-main">
         <img
           src="https://res.cloudinary.com/dlovqnrza/image/upload/v1710952325/BEC_bmbdkx.jpg"

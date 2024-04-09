@@ -5,7 +5,7 @@ import Navbar from '../Navbar';
 const AddDeptForm = () => {
   const [formData, setFormData] = useState({
     departmentName: '',
-    labName: ''
+    roomNo: ''
   });
 
   const handleChange = (e) => {
@@ -57,8 +57,8 @@ const AddDeptForm = () => {
             <input type="text" id="departmentName" name="departmentName" value={formData.departmentName} onChange={handleChange} className="task-input-field" />
           </div>
           <div className="create-task-form-input">
-            <label htmlFor="labName">Lab Name:</label>
-            <input type="text" id="labName" name="labName" value={formData.labName} onChange={handleChange} className="task-input-field" />
+            <label htmlFor="roomNo">Room No:</label>
+            <input type="text" id="roomNo" name="roomNo" value={formData.labName} onChange={handleChange} className="task-input-field" />
           </div>
           <button type="submit" className="add-dept-btn">Add Dept</button>
         </form>

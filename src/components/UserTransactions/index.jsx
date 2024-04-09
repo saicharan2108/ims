@@ -3,6 +3,7 @@ import Popup from 'reactjs-popup';
 import './index.css';
 import 'reactjs-popup/dist/index.css';
 import Navbar from '../Navbar';
+import UserNavbar from '../UserNavbar';
 
 const UserTransactions = () => {
   const [inventoryData, setInventoryData] = useState([]);
@@ -26,7 +27,7 @@ const UserTransactions = () => {
 
   return (
     <>
-      <Navbar />
+      <UserNavbar />
       <div className="task-container-add">
         <div className="task-list-container">
           <div>

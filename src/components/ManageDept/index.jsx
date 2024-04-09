@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
-
 import './index.css';
 import 'reactjs-popup/dist/index.css';
 import Navbar from '../Navbar';
@@ -11,6 +10,7 @@ const ManageDeptForm = () => {
     labName: ''
   });
 
+  const [departmentOptions, setDepartmentOptions] = useState([]);
   const [departmentData, setDepartmentData] = useState([]);
 
   useEffect(() => {
@@ -18,34 +18,34 @@ const ManageDeptForm = () => {
     fetchDepartmentData();
   }, []);
 
-
-  const deleteDepartment = async (labName) => {
-    try {
-        const response = await fetch(`http://localhost:3030/api/departments/${labName}`, {
-            method: 'DELETE',
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to delete department');
-        }
-
-        // Update the state to reflect the deletion
-        setDepartmentData(departmentData.filter(department => department.labName !== labName));
-        alert('Department deleted successfully');
-    } catch (error) {
-        console.error('Error deleting department:', error);
-    }
-}
-
-  
-
   const fetchDepartmentData = async () => {
     try {
       const response = await fetch('http://localhost:3030/api/departments');
       const data = await response.json();
+      // Extract department names
+      const departmentNames = data.map(department => department.departmentName);
+      setDepartmentOptions(departmentNames);
       setDepartmentData(data);
     } catch (error) {
       console.error('Error fetching department data:', error);
+    }
+  };
+
+  const deleteDepartment = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3030/api/departments/delete/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete department');
+      }
+
+      // Update the state to reflect the deletion
+      setDepartmentData(departmentData.filter(department => department._id !== id));
+      alert('Department deleted successfully');
+    } catch (error) {
+      console.error('Error deleting department:', error);
     }
   };
 
@@ -59,8 +59,9 @@ const ManageDeptForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+    // Filter department data based on selected department name
+    const filteredData = departmentData.filter(department => department.departmentName === formData.departmentName);
+    setDepartmentData(filteredData);
   };
 
   return (
@@ -82,27 +83,10 @@ const ManageDeptForm = () => {
               name="departmentName"
               value={formData.departmentName}
             >
-              <option value="CSE" className="task-input-field">
-                CSE
-              </option>
-              <option value="EEE" className="task-input-field">
-                EEE
-              </option>
-              <option value="ME" className="task-input-field">
-                ME
-              </option>
-              <option value="CE" className="task-input-field">
-                CE
-              </option>
-              <option value="ECE" className="task-input-field">
-                ECE
-              </option>
-              <option value="AE" className="task-input-field">
-                AE
-              </option>
-              <option value="IT" className="task-input-field">
-                IT
-              </option>
+              <option value="" disabled>Select Department</option>
+              {departmentOptions.map(option => (
+                <option key={option} value={option}>{option}</option>
+              ))}
             </select>
           </div>
           <button type="submit" className="add-dept-btn">
@@ -113,16 +97,14 @@ const ManageDeptForm = () => {
           <div>
             <div className="table-header">
               <li className="table-column">Department Name</li>
-              <li className="table-column">Lab Name</li>
+              <li className="table-column">Room No</li>
               <li className="table-column">Delete</li>
             </div>
             {departmentData.map((task) => (
               <div key={task._id} className="task-row">
                 <div className="table-row">{task.departmentName}</div>
-                <div className="table-row">{task.labName}</div>
-               
-                <div className='table-row'><button className="delete-btn" onClick={() => deleteDepartment(task.labName)}>Delete</button></div>
-
+                <div className="table-row">{task.roomNo}</div>
+                <div className='table-row'><button className="delete-btn" onClick={() => deleteDepartment(task._id)}>Delete</button></div>
               </div>
             ))}
           </div>
