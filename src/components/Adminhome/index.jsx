@@ -14,7 +14,7 @@ const AdminHome = () => {
   const [selectedAction, setSelectedAction] = useState("");
   const [selectedDropdown, setSelectedDropdown] = useState("");
 
-  const handleItemClick = (item) => {
+  const handleItemClick = (item) => { 
     setSelectedItem(item);
     setSelectedAction("");
     setSelectedDropdown(item); // Set selected dropdown when item changes
@@ -57,6 +57,8 @@ const AdminHome = () => {
         </div>
         <div className="dropdowns-container">
           <div className="dropdown">
+          <img src="https://w7.pngwing.com/pngs/535/328/png-transparent-department-store-nihonbashi-shop-retail-customer-department-store-angle-building-retail-thumbnail.png" className="home-icon-image" alt="lab-icon"/>
+
             <button className={`dropdown-button ${selectedDropdown === "Department Store inventory" && "active"}`} onClick={() => handleItemClick("Department Store inventory")}>
               Department Store Inventory
             </button>
@@ -70,6 +72,8 @@ const AdminHome = () => {
             </div>
           </div>
           <div className="dropdown">
+          <img src="https://miro.medium.com/v2/resize:fit:828/format:webp/1*51_d_b0MZNZLzMmMkZVWAA.png" className="home-icon-image" alt="lab-icon"/>
+
             <button className={`dropdown-button ${selectedDropdown === "Lab Equipment" && "active"}`} onClick={() => handleItemClick("Lab Equipment")}>
               Lab Equipment
             </button>
@@ -83,6 +87,7 @@ const AdminHome = () => {
             </div>
           </div>
           <div className="dropdown">
+          <img src="https://thumbs.dreamstime.com/z/kids-canteen-buying-eating-lunch-back-to-school-cartoon-vector-isolated-illustration-kids-canteen-buying-eating-169180111.jpg?ct=jpeg" className="home-icon-image" alt="canteen-icon"/>
             <button className={`dropdown-button ${selectedDropdown === "Canteen Inventory" && "active"}`} onClick={() => handleItemClick("Canteen Inventory")}>
               Canteen Inventory
             </button>

@@ -16,6 +16,7 @@ import UserInventory from './components/UserInventory';
 import UserDept from './components/UserDept';
 import UserTransactions from './components/UserTransactions';
 import UserAnuallyReports from './components/UserAnuallyReports'
+import Alerts from "./components/Alerts"
 
 
 
@@ -38,6 +39,8 @@ const App = () => (
     <Route path="/user-dept" element={<UserDept/>} />
     <Route path="/user-transactions" element={<UserTransactions/>} />
     <Route path="/user-reports" element={<UserAnuallyReports/>} />
+    <Route path="/alerts" element={<Alerts/>} />
+
 
 
 

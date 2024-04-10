@@ -108,7 +108,8 @@ const LabEquipmentManage = () => {
             <div className="table-row">{item.unitPrice}</div>
             <div className="table-row">{item.totalCost}</div>
             <div className="table-row">{item.invoiceNo}</div>
-            <div className="table-row">{item.purchaseDate}</div>
+            <div className="table-row">{item.purchaseDate ? new Date(item.purchaseDate).toLocaleDateString() : ''}</div>
+
             <div className="table-row">{item.warranty}</div>
             <div className="table-row">{item.supplierAddress}</div>
             <div className="table-row">{item.supplierContact}</div>
@@ -128,15 +129,15 @@ const LabEquipmentManage = () => {
                   </div>
                   <div className='popup-label-input'>
                     <label className="popup-label">Quantity</label>
-                    <input type="text" value={editItem ? editItem.quantity : ''} className="popup-input" onChange={(e) => handleEditChange(e, 'quantity')} />
+                    <input type="number" value={editItem ? editItem.quantity : ''} className="popup-input" onChange={(e) => handleEditChange(e, 'quantity')} />
                   </div>
                   <div className='popup-label-input'>
                     <label className="popup-label">Unit Price</label>
-                    <input type="text" value={editItem ? editItem.unitPrice : ''} className="popup-input" onChange={(e) => handleEditChange(e, 'unitPrice')} />
+                    <input type="number" value={editItem ? editItem.unitPrice : ''} className="popup-input" onChange={(e) => handleEditChange(e, 'unitPrice')} />
                   </div>
                   <div className='popup-label-input'>
                     <label className="popup-label">Total Cost</label>
-                    <input type="text" value={editItem ? editItem.totalCost : ''} className="popup-input" onChange={(e) => handleEditChange(e, 'totalCost')} />
+                    <input type="number" value={editItem ? editItem.totalCost : ''} className="popup-input" onChange={(e) => handleEditChange(e, 'totalCost')} />
                   </div>
                   <div className='popup-label-input'>
                     <label className="popup-label">Invoice Number</label>
@@ -144,7 +145,7 @@ const LabEquipmentManage = () => {
                   </div>
                   <div className='popup-label-input'>
                     <label className="popup-label">Purchase Date</label>
-                    <input type="text" value={editItem ? editItem.purchaseDate : ''} className="popup-input" onChange={(e) => handleEditChange(e, 'purchaseDate')} />
+                    <input type="Date" value={editItem ? editItem.purchaseDate : ''} className="popup-input" onChange={(e) => handleEditChange(e, 'purchaseDate')} />
                   </div>
                   <div className='popup-label-input'>
                     <label className="popup-label">Warranty</label>

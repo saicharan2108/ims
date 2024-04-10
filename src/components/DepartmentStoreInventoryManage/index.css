@@ -459,7 +459,7 @@
 .table-column {
   list-style-type: none;
   border-style: solid;
-  max-width:120px !important;
+  max-width:130px !important;
   border-width:0.5px;
   text-align: center;
   font-weight:bold;
@@ -468,7 +468,7 @@
 
 .table-row {
   list-style-type: none;
-  max-width:120px !important;
+  max-width:130px !important;
   border-width:1px;
   text-align: center;
   font-weight:normal;

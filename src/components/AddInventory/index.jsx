@@ -86,11 +86,11 @@ const AddInventory = () => {
         <br/>
         <div className="create-task-form-input">
           <label htmlFor="quantity">Quantity:</label>
-          <input type="text" id="quantity" name="quantity" value={formData.quantity} onChange={handleChange} className="task-input-field" />
+          <input type="number" id="quantity" name="quantity" value={formData.quantity} onChange={handleChange} className="task-input-field" />
         </div>
         <div className="create-task-form-input">
           <label htmlFor="unitPrice">Unit Price:</label>
-          <input type="text" id="unitPrice" name="unitPrice" value={formData.unitPrice} onChange={handleChange} className="task-input-field" />
+          <input type="number" id="unitPrice" name="unitPrice" value={formData.unitPrice} onChange={handleChange} className="task-input-field" />
         </div>
         <div className="create-task-form-input">
           <label htmlFor="invoiceNo">Invoice No:</label>
@@ -98,11 +98,11 @@ const AddInventory = () => {
         </div>
         <div className="create-task-form-input">
           <label htmlFor="purchaseDate">Purchase Date:</label>
-          <input type="text" id="purchaseDate" name="purchaseDate" value={formData.purchaseDate} onChange={handleChange} className="task-input-field" />
+          <input type="Date" id="purchaseDate" name="purchaseDate" value={formData.purchaseDate} onChange={handleChange} className="task-input-field" />
         </div>
         <div className="create-task-form-input">
           <label htmlFor="expiryDate">Expiry Date:</label>
-          <input type="text" id="expiryDate" name="expiryDate" value={formData.expiryDate} onChange={handleChange} className="task-input-field" />
+          <input type="Date" id="expiryDate" name="expiryDate" value={formData.expiryDate} onChange={handleChange} className="task-input-field" />
         </div>
         <div className="create-task-form-input">
           <label htmlFor="supplierName">Supplier Name:</label>
@@ -123,7 +123,7 @@ const AddInventory = () => {
         <button type="submit" className="create-btn">Add</button>
       </form>
     </div>
-  ;
+  
   </div>
   )
 

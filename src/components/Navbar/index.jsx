@@ -12,6 +12,7 @@ import {
   UserImage,
   LogoutText,
   LinkItem,
+  AlertsIcon,
   LogoutIcon,
   SubNavItem,
   DepartmentsIcon,
@@ -207,6 +208,11 @@ const Navbar = () => {
             </LinkItem>
           </SubNavContainer>
         )}
+        <LinkItem to="/alerts">
+          <NavItem isActive={activeNavItem === 'alerts'} onClick={() => clickedNavItem('alerts')}>
+            <AlertsIcon /> Alerts 
+          </NavItem>
+        </LinkItem>
       </NavContainer>
     </>
   );

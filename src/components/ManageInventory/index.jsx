@@ -76,7 +76,7 @@ const Inventory = () => {
                   <div className="table-row">{task["systemConfiguration"]}</div>
                   <div className="table-row">{task["quantity"]}</div>
                   <div className="table-row">{task["invoiceNo"]}</div>
-                  <div className="table-row">{task["purchaseDate"]}</div>
+                  <div className="table-row">{task.purchaseDate ? new Date(task.purchaseDate).toLocaleDateString() : ''}</div>
                   <div className="table-row">{task["expiryDate"]}</div>
                   <div className="table-row">{task["unitPrice"]}</div>
                   <div className="table-row">{task["supplierContactNumber"]}</div>

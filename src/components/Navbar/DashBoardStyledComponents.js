@@ -7,6 +7,8 @@ import {MdOutlineCoPresent} from 'react-icons/md'
 import {HiOutlineLogout,HiOutlineChevronDown,HiOutlineChevronRight} from 'react-icons/hi'
 import { MdOutlineInventory } from "react-icons/md";
 import { FcDepartment } from "react-icons/fc";
+import { IoIosNotifications } from "react-icons/io";
+
 
 
 
@@ -110,6 +112,14 @@ margin-right:10px;
 `
 
 export const DepartmentsIcon =  styled(FcDepartment)`
+height:20px;
+width:20px;
+margin-left:5px;
+margin-top:0px;
+margin-right:10px;
+`
+
+export const AlertsIcon =  styled(IoIosNotifications)`
 height:20px;
 width:20px;
 margin-left:5px;

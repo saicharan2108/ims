@@ -107,7 +107,8 @@ const UserCanteenDept = () => {
             <div className="table-row">{item.quantity}</div>
             <div className="table-row">{item.unitPrice}</div>
             <div className="table-row">{item.totalCost}</div>
-            <div className="table-row">{item.purchaseDate}</div>
+            <div className="table-row">{item.purchaseDate ? new Date(item.purchaseDate).toLocaleDateString() : ''}</div>
+
             <div className="table-row">{item.supplierName}</div>
             <div className="table-row">{item.supplierAddress}</div>
             <div className="table-row">{item.supplierContact}</div>

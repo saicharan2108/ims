@@ -106,7 +106,8 @@ const DepartmentStoreInventoryManage = () => {
             <div className="table-row">{item.itemName}</div>
             <div className="table-row">{item.itemCategory}</div>
             <div className="table-row">{item.unitMeasurement}</div>
-            <div className="table-row">{item.purchaseDate}</div>
+            <div className="table-row">{item.purchaseDate ? new Date(item.purchaseDate).toLocaleDateString() : ''}</div>
+
             <div className="table-row">{item.quantity}</div>
             <div className="table-row">{item.unitCost}</div>
             <div className="table-row">{item.totalCost}</div>

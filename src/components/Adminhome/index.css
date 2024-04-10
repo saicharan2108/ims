@@ -436,3 +436,9 @@
   margin:20px;
   color:black;
 }
+
+.home-icon-image{
+  height:150px;
+  width:170px;
+  border-radius:7px;
+}

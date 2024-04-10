@@ -107,7 +107,8 @@ const UserLabEquipment = () => {
             <div className="table-row">{item.unitPrice}</div>
             <div className="table-row">{item.totalCost}</div>
             <div className="table-row">{item.invoiceNo}</div>
-            <div className="table-row">{item.purchaseDate}</div>
+            <div className="table-row">{item.purchaseDate ? new Date(item.purchaseDate).toLocaleDateString() : ''}</div>
+
             <div className="table-row">{item.warranty}</div>
             <div className="table-row">{item.supplierAddress}</div>
             <div className="table-row">{item.supplierContact}</div>

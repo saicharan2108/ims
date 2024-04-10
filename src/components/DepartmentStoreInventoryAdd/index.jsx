@@ -79,19 +79,19 @@ const DepartmentStoreInventoryAdd = () => {
           </div>
           <div className="create-task-form-input">
             <label htmlFor="purchaseDate">Purchase Date:</label>
-            <input type="text" id="purchaseDate" name="purchaseDate" value={formData.purchaseDate} onChange={handleChange} className="task-input-field" />
+            <input type="Date" id="purchaseDate" name="purchaseDate" value={formData.purchaseDate} onChange={handleChange} className="task-input-field" />
           </div>
           <div className="create-task-form-input">
             <label htmlFor="quantity">Quantity:</label>
-            <input type="text" id="quantity" name="quantity" value={formData.quantity} onChange={handleChange} className="task-input-field" />
+            <input type="number" id="quantity" name="quantity" value={formData.quantity} onChange={handleChange} className="task-input-field" />
           </div>
           <div className="create-task-form-input">
             <label htmlFor="unitCost">Unit Cost:</label>
-            <input type="text" id="unitCost" name="unitCost" value={formData.unitCost} onChange={handleChange} className="task-input-field" />
+            <input type="number" id="unitCost" name="unitCost" value={formData.unitCost} onChange={handleChange} className="task-input-field" />
           </div>
           <div className="create-task-form-input">
             <label htmlFor="totalCost">Total Cost:</label>
-            <input type="text" id="totalCost" name="totalCost" value={formData.totalCost} onChange={handleChange} className="task-input-field" />
+            <input type="number" id="totalCost" name="totalCost" value={formData.totalCost} onChange={handleChange} className="task-input-field" />
           </div>
           <div className="create-task-form-input">
             <label htmlFor="condition">Condition:</label>
