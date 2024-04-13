@@ -41,47 +41,53 @@ const IssueItem = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    // Find the selected item object from itemNames state
-    const selectedItem = itemNames.find(item => item._id === formData.itemName);
-    
-    // Calculate the updated quantity by subtracting the issued quantity from the current quantity
-    const updatedQuantity = selectedItem.quantity - parseInt(formData.quantity);
+  // Find the selected item object from itemNames state
+  const selectedItem = itemNames.find(item => item._id === formData.itemName);
+  
+  // Calculate the updated quantity by subtracting the issued quantity from the current quantity
+  const updatedQuantity = selectedItem.quantity - parseInt(formData.quantity);
 
-    try {
-      // Call the update API to decrease the quantity based on the ID
-      await fetch(`http://localhost:3030/api/update/${formData.storeType.toLowerCase()}/${formData.itemName}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ quantity: updatedQuantity }),
-      });
-
-      // Post the issued data to the new database
-      const response = await fetch('http://localhost:3030/api/issue/store', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Issue created successfully:', data);
-        alert('Issue created successfully');
-      } else {
-        console.error('Failed to create issue:', response.statusText);
-        alert('Failed to create issue');
-      }
-    } catch (error) {
-      console.error('Error creating issue:', error);
-      alert('Error creating issue');
-    }
+  // Update the formData object to include the updatedQuantity
+  const updatedFormData = {
+    ...formData,
+    quantity: updatedQuantity, // Updated quantity
   };
+
+  try {
+    // Call the update API to decrease the quantity based on the ID
+    await fetch(`http://localhost:3030/api/update/${formData.storeType.toLowerCase()}/${formData.itemName}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ quantity: updatedQuantity }),
+    });
+
+    // Post the issued data to the new database
+    const response = await fetch('http://localhost:3030/api/issue/store', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedFormData), // Send updatedFormData
+    });
+    
+    if (response.ok) {
+      const data = await response.json();
+      console.log('Issue created successfully:', data);
+      alert('Issue created successfully');
+    } else {
+      console.error('Failed to create issue:', response.statusText);
+      alert('Failed to create issue');
+    }
+  } catch (error) {
+    console.error('Error creating issue:', error);
+    alert('Error creating issue');
+  }
+};
 
   return (
     <>
