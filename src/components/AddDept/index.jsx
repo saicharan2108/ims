@@ -50,7 +50,11 @@ const AddDeptForm = () => {
         alt="BEC"
         className="college-logo"
       />
+
       <div className="task-container-add">
+      <h1 className='page-title'>Add Department</h1>
+
+
         <form className="add-dept" onSubmit={handleSubmit}>
           <div className="create-task-form-input">
             <label htmlFor="departmentName">Department Name:</label>

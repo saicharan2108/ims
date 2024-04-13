@@ -283,6 +283,7 @@
   }
 
   .add-items-main-container{
+    margin-left: 0px;
   }
   .add-inventory-form{
     display:flex;

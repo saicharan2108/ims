@@ -9,6 +9,7 @@ const LabEquipmentAdd = () => {
     unitPrice: '',
     totalCost: '',
     invoiceNo: '',
+    condition:'',
     purchaseDate: '',
     warranty: '',
     supplierName:'',
@@ -45,6 +46,9 @@ const LabEquipmentAdd = () => {
           totalCost: '',
           invoiceNo: '',
           purchaseDate: '',
+          condition:'',
+          itemType:'',
+          labName:'',
           warranty: '',
           supplierName:'',
           supplierAddress: '',
@@ -96,6 +100,14 @@ const LabEquipmentAdd = () => {
             <input type="text" id="warranty" name="warranty" value={formData.warranty} onChange={handleChange} className="task-input-field" />
           </div>
           <div className="create-task-form-input">
+            <label htmlFor="itemType">Item Type:</label>
+            <input type="text" id="itemType" name="itemType" value={formData.itemType} onChange={handleChange} className="task-input-field" />
+          </div>
+          <div className="create-task-form-input">
+            <label htmlFor="labName">Lab Name:</label>
+            <input type="text" id="labName" name="labName" value={formData.labName} onChange={handleChange} className="task-input-field" />
+          </div>
+          <div className="create-task-form-input">
             <label htmlFor="supplierName">Supplier Name:</label>
             <input type="text" id="supplierName" name="supplierName" value={formData.supplierName} onChange={handleChange} className="task-input-field" />
           </div>
@@ -106,6 +118,15 @@ const LabEquipmentAdd = () => {
           <div className="create-task-form-input">
             <label htmlFor="supplierContact">Supplier Contact:</label>
             <input type="text" id="supplierContact" name="supplierContact" value={formData.supplierContact} onChange={handleChange} className="task-input-field" />
+          </div>
+          <div className="create-task-form-input">
+            <label htmlFor="condition">Condition:</label>
+            <select id="condition" name="condition" value={formData.condition} onChange={handleChange} className="task-input-field">
+              <option value="" className="task-input-field" >Select Condition</option>
+              <option value="New" className="task-input-field">New</option>
+              <option value="Repaired" className="task-input-field">Repaired</option>
+              <option value="Damaged" className="task-input-field">Damaged</option>
+            </select>
           </div>
           <button type="submit" className="create-btn">Add</button>
         </form>

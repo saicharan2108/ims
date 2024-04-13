@@ -74,7 +74,10 @@ const AddInventory = () => {
               alt="BEC"
               className="college-logo"
             />
+                  <h1 className='page-title'>Admin Add Items</h1>
+
       <form className="add-inventory-form" onSubmit={handleSubmit}>
+      <br/>
         <div className="create-task-form-input">
           <label htmlFor="itemName">Item Name:</label>
           <input type="text" id="itemName" name="itemName" value={formData.itemName} onChange={handleChange} className="task-input-field" />

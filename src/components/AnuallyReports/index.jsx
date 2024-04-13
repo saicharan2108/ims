@@ -11,14 +11,14 @@ const AnuallyReports = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetchData();
   }, [formData]);
 
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/add/${formData.category.toLowerCase()}/store`);
+      const response = await fetch(`http://localhost:3030/api/add/${formData.category.toLowerCase()}/fetch/store/${formData.year}`);
       const jsonData = await response.json();
+
       setData(jsonData);
       setLoading(false);
     } catch (error) {
@@ -37,9 +37,11 @@ const AnuallyReports = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    fetchData();
+
     // Handle form submission here if needed
   };
-
+console.log(data)
   return (
     <>
       <Navbar />
@@ -49,6 +51,7 @@ const AnuallyReports = () => {
         className="college-logo"
       />
       <div className="task-container-add">
+      <h1 className='page-title'>Annual Reports</h1>
         <form className="add-dept" onSubmit={handleSubmit}>
           <div className="create-task-form-input">
             <label htmlFor="category">Category:</label>
@@ -80,20 +83,38 @@ const AnuallyReports = () => {
           </div>
           <button type="submit" className="add-dept-btn">Search</button>
         </form>
+
+
+
+
+
+    
+            
         {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <div>
-            {/* Display fetched data here */}
-            <ul>
-              {data.map((item, index) => (
-                <li key={index}>
-                  {/* Display item details */}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+  <p>Loading...</p>
+) : (
+  <div className="inventory-table">
+    <div className="table-header-anual">
+      <div className="table-column">Item Name</div>
+      <div className="table-column">Item Category</div>
+      <div className="table-column">Purchase Date</div>
+      <div className="table-column">Quantity</div>
+      <div className="table-column">Unit Cost</div>
+      <div className="table-column">Total Cost</div>
+    </div>
+    {data.map(item => (
+      <div key={item._id} className="table-row-container">
+        <div className="table-row">{item.itemName}</div>
+        <div className="table-row">{item.itemCategory}</div>
+        <div className="table-row">{item.purchaseDate ? new Date(item.purchaseDate).toLocaleDateString() : ''}</div>
+        <div className="table-row">{item.quantity}</div>
+        <div className="table-row">{item.unitCost}</div>
+        <div className="table-row">{item.totalCost}</div>
+      </div>
+    ))}
+  </div>
+)}
+
       </div>
     </>
   );

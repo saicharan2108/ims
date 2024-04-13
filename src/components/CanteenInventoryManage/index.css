@@ -353,6 +353,7 @@
   background-color: #6278f5;
   color:white;
   position: sticky;
+  min-width: auto;
   
 }
 

@@ -53,8 +53,8 @@ const Inventory = () => {
           className="college-logo"
         />
         <div className="greeting-container">
-          <p className="greeting-msg">Hi Admin</p>
-          <h1>Welcome Back <span className="wave">👋🏻</span></h1>
+          <p className="greeting-msg">Hi Admin <span className="wave">👋🏻</span></p>
+          <h1>Manage Inventory </h1>
         </div>
         <div className="task-container">
           <div className="task-list-container">

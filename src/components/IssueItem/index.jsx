@@ -1,16 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.css';
 import Navbar from '../Navbar';
 
 const IssueItem = () => {
   const [formData, setFormData] = useState({
-    category: '',
+    storeType: '',
     itemName: '',
-    departmentName: 'CSE',
-    labName: '',
-    year: '',
-    monthName: ''
+    departmentName: '', // Change departmentName field to an empty string
+    room: '',
+    quantity: '',
+    date: ''
   });
+  const [itemNames, setItemNames] = useState([]);
+
+  useEffect(() => {
+    fetchItemNames();
+  }, [formData.storeType]);
+
+  const fetchItemNames = async () => {
+    if (formData.storeType) {
+      try {
+        const response = await fetch(`http://localhost:3030/api/add/${formData.storeType.toLowerCase()}/store`);
+        if (response.ok) {
+          const data = await response.json();
+          setItemNames(data);
+        } else {
+          console.error('Failed to fetch item names:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error fetching item names:', error);
+      }
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,9 +43,25 @@ const IssueItem = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Find the selected item object from itemNames state
+    const selectedItem = itemNames.find(item => item._id === formData.itemName);
     
+    // Calculate the updated quantity by subtracting the issued quantity from the current quantity
+    const updatedQuantity = selectedItem.quantity - parseInt(formData.quantity);
+
     try {
-      const response = await fetch('http://localhost:3030/api/issue', {
+      // Call the update API to decrease the quantity based on the ID
+      await fetch(`http://localhost:3030/api/update/${formData.storeType.toLowerCase()}/${formData.itemName}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ quantity: updatedQuantity }),
+      });
+
+      // Post the issued data to the new database
+      const response = await fetch('http://localhost:3030/api/issue/store', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,40 +92,45 @@ const IssueItem = () => {
         className="college-logo"
       />
       <div className="task-container-add">
+        <h1 className='page-title'>Issue Item</h1>
         <form className="add-dept" onSubmit={handleSubmit}>
           <div className="create-task-form-input">
-            <label htmlFor="category">Category :</label>
-            <input type="text" id="category" name="category" value={formData.category} onChange={handleChange} className="task-input-field" />
-          </div>
-          <div className="create-task-form-input">
-            <label htmlFor="itemName">Item Name:</label>
-            <input type="text" id="itemName" name="itemName" value={formData.itemName} onChange={handleChange} className="task-input-field" />
-          </div>
-          <div className="create-task-form-input">
-            <label htmlFor="departmentName">Select The Department Name:</label>
-            <select id="departmentName" className="task-input-field" onChange={handleChange} name="departmentName" value={formData.departmentName}>
-              <option value="CSE" className="task-input-field">CSE</option>
-              <option value="EEE" className="task-input-field">EEE</option>
-              <option value="ME" className="task-input-field">ME</option>
-              <option value="CE" className="task-input-field">CE</option>
-              <option value="ECE" className="task-input-field">ECE</option>
-              <option value="AE" className="task-input-field">AE</option>
-              <option value="IT" className="task-input-field">IT</option>
+            <label htmlFor="storeType">Select Store Type:</label>
+            <select id="storeType" name="storeType" value={formData.storeType} onChange={handleChange} className="task-input-field">
+              <option value="">Select Store Type</option>
+              <option value="Canteen">Canteen Store</option>
+              <option value="Lab">Lab Store</option>
+              <option value="Department">Department Store</option>
             </select>
           </div>
+          {formData.storeType && (
+            <div className="create-task-form-input">
+              <label htmlFor="itemName">Select Item Name:</label>
+              <select id="itemName" name="itemName" value={formData.itemName} onChange={handleChange} className="task-input-field">
+                <option value="">Select Item Name</option>
+                {itemNames.map((item) => (
+                  <option key={item._id} value={item._id}>{item.itemName}</option>
+                ))}
+              </select>
+            </div>
+          )}
           <div className="create-task-form-input">
-            <label htmlFor="labName">Lab Name:</label>
-            <input type="text" id="labName" name="labName" value={formData.labName} onChange={handleChange} className="task-input-field" />
+            <label htmlFor="room">Room:</label>
+            <input type="text" id="room" name="room" value={formData.room} onChange={handleChange} className="task-input-field" />
           </div>
           <div className="create-task-form-input">
-            <label htmlFor="year">Year:</label>
-            <input type="text" id="year" name="year" value={formData.year} onChange={handleChange} className="task-input-field" />
+            <label htmlFor="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" value={formData.quantity} onChange={handleChange} className="task-input-field" />
           </div>
           <div className="create-task-form-input">
-            <label htmlFor="monthName">Month Name:</label>
-            <input type="text" id="monthName" name="monthName" value={formData.monthName} onChange={handleChange} className="task-input-field" />
+            <label htmlFor="departmentName">Department:</label>
+            <input type="text" id="departmentName" name="departmentName" value={formData.departmentName} onChange={handleChange} className="task-input-field" />
           </div>
-          <button type="submit" className="add-dept-btn">Issue</button>
+          <div className="create-task-form-input">
+            <label htmlFor="date">Date:</label>
+            <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} className="task-input-field" />
+          </div>
+          <button type="submit" className="add-dept-btn" >Issue</button>
         </form>
       </div>
     </>

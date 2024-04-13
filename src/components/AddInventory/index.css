@@ -263,6 +263,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     margin-left:180px;
+    width:80vw;
   }
   .college-logo{
     margin-left:110px;
@@ -284,4 +285,7 @@
 
   .add-items-main-container{
     display: flex;
+  }
+  .page-title{
+    margin-left: 200px;
   }

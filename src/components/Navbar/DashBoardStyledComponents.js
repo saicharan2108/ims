@@ -25,6 +25,7 @@ export const NavContainer = styled.nav`
   border-top-right-radius: 7px;
   margin-top:-40px;
   border-bottom-right-radius: 7px;
+  z-index:4;
 
 
 `;

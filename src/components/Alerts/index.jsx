@@ -44,6 +44,7 @@ const Alerts = () => {
     <>
       <Navbar />
       <div className="task-container-add">
+      <h1 className='page-title'>Alerts</h1>
         <div className="task-list-container">
           <div>
             <div className="table-header">

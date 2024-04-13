@@ -31,7 +31,7 @@ const ManageInventoryForm = () => {
 
   const fetchInventoryData = async () => {
     try {
-      const response = await fetch('http://localhost:3030/api/issues');
+      const response = await fetch('http://localhost:3030/api/issue/store');
       const data = await response.json();
       setInventoryData(data);
 
@@ -44,26 +44,25 @@ const ManageInventoryForm = () => {
     <>
       <Navbar />
       <div className="task-container-add">
+      <h1 className='page-title'>Transaction History</h1>
         <div className="task-list-container">
           <div>
             <div className="table-header">
-              <li className="table-column">Category</li>
-              <li className="table-column">Item Name</li>
+              <li className="table-column-id">Item ID</li>
               <li className="table-column">Department Name</li>
-              <li className="table-column">Lab Name</li>
-              <li className="table-column">Year</li>
-              <li className="table-column">Month Name</li>
+              <li className="table-column">Room</li>
+              <li className="table-column">Quantity</li>
+              <li className="table-column">Date</li>
               <li className="table-column">Delete</li>
             </div>
             {inventoryData.map((item) => (
               <div key={item._id} className="task-row">
-                <div className="table-row">{item.category}</div>
-                <div className="table-row">{item.itemName}</div>
+                <div className="table-row-id">{item.itemName}</div>
                 <div className="table-row">{item.departmentName}</div>
-                <div className="table-row">{item.labName}</div>
-                <div className="table-row">{item.year}</div>
-                <div className="table-row">{item.monthName}</div>
-                {/* <Popup trigger={<div className='table-row'><button className="edit-btn">Edit</button></div>} position="right center">
+                <div className="table-row">{item.room}</div>
+                <div className="table-row">{item.quantity}</div>
+                <div className="table-row">{item.date ? new Date(item.date).toLocaleDateString() : ''}</div>
+           {/* <Popup trigger={<div className='table-row'><button className="edit-btn">Edit</button></div>} position="right center">
                   <div className='popup-container'>
                     <h1 className="popup-title">Edit Inventory Item</h1>
                     <br />
