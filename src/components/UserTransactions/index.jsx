@@ -52,7 +52,8 @@ const UserTransactions = () => {
               <li className="table-column-id">Item ID</li>
               <li className="table-column">Department Name</li>
               <li className="table-column">Room</li>
-              <li className="table-column">Quantity</li>
+              <li className="table-column">Issued</li>
+              <li className="table-column">Remaining</li>
               <li className="table-column">Date</li>
             </div>
             {inventoryData.map((item) => (
@@ -61,6 +62,7 @@ const UserTransactions = () => {
                 <div className="table-row">{item.departmentName}</div>
                 <div className="table-row">{item.room}</div>
                 <div className="table-row">{item.quantity}</div>
+               <div className="table-row">{item.updatedQuantity}</div>
                 <div className="table-row">{item.date ? new Date(item.date).toLocaleDateString() : ''}</div>
               </div>
             ))}
