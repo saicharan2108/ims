@@ -8,7 +8,6 @@ const CanteenInventoryAdd = () => {
     itemCategory: '',
     quantity: '',
     unitPrice: '',
-    totalCost: '',
     purchaseDate: '',
     supplierName: '',
     supplierAddress: '',
@@ -26,12 +25,15 @@ const CanteenInventoryAdd = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Calculate total cost based on quantity and unit price
+      const totalCost = formData.quantity * formData.unitPrice;
+
       const response = await fetch('http://localhost:3030/api/add/canteen/item', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, totalCost }), // Include totalCost in the request body
       });
       
       if (response.ok) {
@@ -42,7 +44,6 @@ const CanteenInventoryAdd = () => {
           itemCategory: '',
           quantity: '',
           unitPrice: '',
-          totalCost: '',
           purchaseDate: '',
           supplierName: '',
           supplierAddress: '',
@@ -80,10 +81,6 @@ const CanteenInventoryAdd = () => {
           <div className="create-task-form-input">
             <label htmlFor="unitPrice">Unit Price:</label>
             <input type="number" id="unitPrice" name="unitPrice" value={formData.unitPrice} onChange={handleChange} className="task-input-field" />
-          </div>
-          <div className="create-task-form-input">
-            <label htmlFor="totalCost">Total Cost:</label>
-            <input type="number" id="totalCost" name="totalCost" value={formData.totalCost} onChange={handleChange} className="task-input-field" />
           </div>
           <div className="create-task-form-input">
             <label htmlFor="purchaseDate">Purchase Date:</label>

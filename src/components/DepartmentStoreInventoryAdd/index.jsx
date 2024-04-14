@@ -9,7 +9,6 @@ const DepartmentStoreInventoryAdd = () => {
     purchaseDate: '',
     quantity: '',
     unitCost: '',
-    totalCost: '',
     condition: '',
     warranty: '',
     supplierName: '',
@@ -27,13 +26,16 @@ const DepartmentStoreInventoryAdd = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const { quantity, unitCost } = formData;
+    const totalCost = quantity * unitCost;
+    const newData = { ...formData, totalCost }; // Add totalCost to form data
     try {
       const response = await fetch('http://localhost:3030/api/add/department/store', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(newData),
       });
       
       if (response.ok) {
@@ -45,7 +47,6 @@ const DepartmentStoreInventoryAdd = () => {
           purchaseDate: '',
           quantity: '',
           unitCost: '',
-          totalCost: '',
           condition: '',
           warranty: '',
           supplierName: '',
@@ -90,11 +91,7 @@ const DepartmentStoreInventoryAdd = () => {
             <label htmlFor="unitCost">Unit Cost:</label>
             <input type="number" id="unitCost" name="unitCost" value={formData.unitCost} onChange={handleChange} className="task-input-field" />
           </div>
-          <div className="create-task-form-input">
-            <label htmlFor="totalCost">Total Cost:</label>
-            <input type="number" id="totalCost" name="totalCost" value={formData.totalCost} onChange={handleChange} className="task-input-field" />
-          </div>
-         
+        
           <div className="create-task-form-input">
             <label htmlFor="warranty">Warranty:</label>
             <input type="text" id="warranty" name="warranty" value={formData.warranty} onChange={handleChange} className="task-input-field" />
