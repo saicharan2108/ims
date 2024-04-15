@@ -20,7 +20,7 @@ const IssueItem = () => {
   const fetchItemNames = async () => {
     if (formData.storeType) {
       try {
-        const response = await fetch(`http://localhost:3030/api/add/${formData.storeType.toLowerCase()}/store`);
+        const response = await fetch(`https://ims-server-63af.onrender.com/api/add/${formData.storeType.toLowerCase()}/store`);
         if (response.ok) {
           const data = await response.json();
           setItemNames(data);
@@ -58,7 +58,7 @@ const IssueItem = () => {
 
   try {
     // Call the update API to decrease the quantity based on the ID
-    await fetch(`http://localhost:3030/api/update/${formData.storeType.toLowerCase()}/${formData.itemName}`, {
+    await fetch(`https://ims-server-63af.onrender.com/api/update/${formData.storeType.toLowerCase()}/${formData.itemName}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ const IssueItem = () => {
     });
 
     // Post the issued data to the new database
-    const response = await fetch('http://localhost:3030/api/issue/store', {
+    const response = await fetch('https://ims-server-63af.onrender.com/api/issue/store', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
