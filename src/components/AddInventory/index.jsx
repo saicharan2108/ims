@@ -28,7 +28,7 @@ const AddInventory = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3030/api/inventory', {
+      const response = await fetch('https://ims-server-63af.onrender.com/api/inventory', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
