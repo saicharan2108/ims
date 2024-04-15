@@ -20,7 +20,7 @@ const AddDeptForm = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:3030/api/add/department', {
+      const res = await fetch('https://ims-server-63af.onrender.com/api/add/department', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
