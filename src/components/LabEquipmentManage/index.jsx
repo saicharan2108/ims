@@ -12,7 +12,7 @@ const LabEquipmentManage = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:3030/api/add/lab/store");
+      const response = await fetch("https://ims-server-63af.onrender.com/api/add/lab/store");
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -25,7 +25,7 @@ const LabEquipmentManage = () => {
 
   const deleteInventory = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3030/api/delete/lab/store/${id}`, {
+      const response = await fetch(`https://ims-server-63af.onrender.com/api/delete/lab/store/${id}`, {
         method: 'DELETE',
       });
 
@@ -43,7 +43,7 @@ const LabEquipmentManage = () => {
 
   const editInventory = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3030/api/edit/lab/store/${id}`, {
+      const response = await fetch(`https://ims-server-63af.onrender.com/api/edit/lab/store/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
