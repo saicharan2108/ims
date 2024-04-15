@@ -16,7 +16,7 @@ const AnuallyReports = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3030/api/add/${formData.category.toLowerCase()}/fetch/store/${formData.year}`);
+      const response = await fetch(`https://ims-server-63af.onrender.com/api/add/${formData.category.toLowerCase()}/fetch/store/${formData.year}`);
       const jsonData = await response.json();
 
       setData(jsonData);
