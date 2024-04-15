@@ -13,7 +13,7 @@ const ManageInventoryForm = () => {
 
   const handleDelete = async (itemName) => {
     try {
-      const response = await fetch(`http://localhost:3030/api/issues/${itemName}`, {
+      const response = await fetch(`https://ims-server-63af.onrender.com/api/issues/${itemName}`, {
         method: 'DELETE'
       });
       if (response.ok) {
@@ -31,7 +31,7 @@ const ManageInventoryForm = () => {
 
   const fetchInventoryData = async () => {
     try {
-      const response = await fetch('http://localhost:3030/api/issue/store');
+      const response = await fetch('https://ims-server-63af.onrender.com/api/issue/store');
       const data = await response.json();
       setInventoryData(data);
 
