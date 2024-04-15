@@ -35,7 +35,7 @@ const Login = () => {
     }
 
     const response = await fetch(
-      "http://localhost:3030/api/login",
+      "https://ims-server-63af.onrender.com/api/login",
       options
     )
     if (response.ok) {
