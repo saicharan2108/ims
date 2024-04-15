@@ -10,7 +10,7 @@ const Inventory = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3030/api/inventory");
+        const response = await fetch("https://ims-server-63af.onrender.com/api/inventory");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -26,7 +26,7 @@ const Inventory = () => {
 
   const deleteInventory = async (invoiceNo) => {
     try {
-      const response = await fetch(`http://localhost:3030/api/inventory/${invoiceNo}`, {
+      const response = await fetch(`https://ims-server-63af.onrender.com/api/inventory/${invoiceNo}`, {
         method: 'DELETE',
       });
   
