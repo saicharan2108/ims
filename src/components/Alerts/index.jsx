@@ -13,7 +13,7 @@ const Alerts = () => {
 
   const handleDelete = async (itemName) => {
     try {
-      const response = await fetch(`http://localhost:3030/api/issues/${itemName}`, {
+      const response = await fetch(`https://ims-server-63af.onrender.com/api/issues/${itemName}`, {
         method: 'DELETE'
       });
       if (response.ok) {
@@ -30,7 +30,7 @@ const Alerts = () => {
 
   const fetchInventoryData = async () => {
     try {
-      const response = await fetch('http://localhost:3030/api/add/department/store');
+      const response = await fetch('https://ims-server-63af.onrender.com/add/department/store');
       const data = await response.json();
       // Filter items with quantity less than 5
       const filteredData = data.filter(item => parseInt(item.quantity) < 5);
