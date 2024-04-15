@@ -21,7 +21,7 @@ const UserDept = () => {
 
   const fetchDepartmentData = async () => {
     try {
-      const response = await fetch('http://localhost:3030/api/departments');
+      const response = await fetch('https://ims-server-63af.onrender.com/api/departments');
       const data = await response.json();
       // Extract department names
       const departmentNames = data.map(department => department.departmentName);
@@ -34,7 +34,7 @@ const UserDept = () => {
 
   const deleteDepartment = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3030/api/departments/delete/${id}`, {
+      const response = await fetch(`https://ims-server-63af.onrender.com/api/departments/delete/${id}`, {
         method: 'DELETE',
       });
 
