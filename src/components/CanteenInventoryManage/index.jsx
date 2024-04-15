@@ -12,7 +12,7 @@ const CanteenInventoryManage = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:3030/api/add/canteen/store");
+      const response = await fetch("https://ims-server-63af.onrender.com/api/add/canteen/store");
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -26,7 +26,7 @@ const CanteenInventoryManage = () => {
 
   const deleteInventory = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3030/api/delete/canteen/store/${id}`, {
+      const response = await fetch(`https://ims-server-63af.onrender.com/api/delete/canteen/store/${id}`, {
         method: 'DELETE',
       });
 
@@ -44,7 +44,7 @@ const CanteenInventoryManage = () => {
 
   const editInventory = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3030/api/edit/canteen/store/${id}`, {
+      const response = await fetch(`https://ims-server-63af.onrender.com/api/edit/canteen/store/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
