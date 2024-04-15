@@ -65,7 +65,7 @@ const SignUp = () => {
       body: JSON.stringify(payload),
     };
 
-    const response = await fetch("http://localhost:3030/api/register", options);
+    const response = await fetch("https://ims-server-63af.onrender.com/api/register", options);
     if (response.ok) {
       setLoading(false);
       const json = await response.json();
