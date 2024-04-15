@@ -30,7 +30,7 @@ const DepartmentStoreInventoryAdd = () => {
     const totalCost = quantity * unitCost;
     const newData = { ...formData, totalCost }; // Add totalCost to form data
     try {
-      const response = await fetch('http://localhost:3030/api/add/department/store', {
+      const response = await fetch('https://ims-server-63af.onrender.com/api/add/department/store', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
