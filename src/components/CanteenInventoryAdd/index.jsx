@@ -28,7 +28,7 @@ const CanteenInventoryAdd = () => {
       // Calculate total cost based on quantity and unit price
       const totalCost = formData.quantity * formData.unitPrice;
 
-      const response = await fetch('http://localhost:3030/api/add/canteen/item', {
+      const response = await fetch('https://ims-server-63af.onrender.com/api/add/canteen/item', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
