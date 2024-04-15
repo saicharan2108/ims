@@ -12,7 +12,7 @@ const DepartmentStoreInventoryManage = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:3030/api/add/department/store");
+      const response = await fetch("https://ims-server-63af.onrender.com/api/add/department/store");
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -25,7 +25,7 @@ const DepartmentStoreInventoryManage = () => {
 
   const deleteInventory = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3030/api/delete/department/store/${id}`, {
+      const response = await fetch(`https://ims-server-63af.onrender.com/api/delete/department/store/${id}`, {
         method: 'DELETE',
       });
 
@@ -43,7 +43,7 @@ const DepartmentStoreInventoryManage = () => {
 
   const editInventory = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3030/api/edit/department/store/${id}`, {
+      const response = await fetch(`https://ims-server-63af.onrender.com/api/edit/department/store/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
