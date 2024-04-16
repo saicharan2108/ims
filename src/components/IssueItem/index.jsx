@@ -53,7 +53,7 @@ const IssueItem = () => {
   // Update the formData object to include the updatedQuantity
   const updatedFormData = {
     ...formData,
-    quantity: updatedQuantity, // Updated quantity
+    updatedQuantity: updatedQuantity, // Updated quantity
   };
 
   try {
