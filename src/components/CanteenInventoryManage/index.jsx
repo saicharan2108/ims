@@ -108,7 +108,7 @@ const CanteenInventoryManage = () => {
             <div className="table-row">{item.itemCategory}</div>
             <div className="table-row">{item.quantity}</div>
             <div className="table-row">{item.unitPrice}</div>
-            <div className="table-row">{item.totalCost}</div>
+            <div className="table-row">{item.quantity * item.unitPrice}</div>
             <div className="table-row">{item.purchaseDate ? new Date(item.purchaseDate).toLocaleDateString() : ''}</div>
 
             <div className="table-row">{item.supplierName}</div>

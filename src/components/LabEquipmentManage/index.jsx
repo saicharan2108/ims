@@ -109,7 +109,7 @@ const LabEquipmentManage = () => {
             <div className="table-row">{item.sysConfig}</div>
             <div className="table-row">{item.quantity}</div>
             <div className="table-row">{item.unitPrice}</div>
-            <div className="table-row">{item.totalCost}</div>
+            <div className="table-row">{item.quantity * item.unitPrice}</div>
             <div className="table-row">{item.invoiceNo}</div>
             <div className="table-row">{item.purchaseDate ? new Date(item.purchaseDate).toLocaleDateString() : ''}</div>
             <div className="table-row">{item.warranty}</div>

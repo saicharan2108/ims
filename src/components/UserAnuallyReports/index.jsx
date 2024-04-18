@@ -110,7 +110,7 @@ console.log(data)
         <div className="table-row">{item.purchaseDate ? new Date(item.purchaseDate).toLocaleDateString() : ''}</div>
         <div className="table-row">{item.quantity}</div>
         <div className="table-row">{item.unitCost}</div>
-        <div className="table-row">{item.totalCost}</div>
+        <div className="table-row">{item.unitCost * item.quantity}</div>
       </div>
     ))}
   </div>

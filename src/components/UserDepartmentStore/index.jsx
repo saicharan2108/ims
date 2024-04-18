@@ -110,7 +110,7 @@ const DepartmentStoreInventoryManage = () => {
 
             <div className="table-row">{item.quantity}</div>
             <div className="table-row">{item.unitCost}</div>
-            <div className="table-row">{item.totalCost}</div>
+            <div className="table-row">{item.quantity * item.unitCost}</div>
             <div className="table-row">{item.condition}</div>
             <div className="table-row">{item.warranty}</div>
             <div className="table-row">{item.supplierName}</div>
