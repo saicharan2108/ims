@@ -9,17 +9,28 @@ const AnuallyReports = () => {
   });
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [grandTotal, setGrandTotal] = useState(0);
+
 
   useEffect(() => {
   }, [formData]);
 
+  const calculateGrandTotal = (items) => {
+    const total = items.reduce((acc, item) => acc + item.quantity * item.unitCost, 0);
+    setGrandTotal(total);
+  };
+
+
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`https://ims-server-63af.onrender.com/api/add/${formData.category.toLowerCase()}/fetch/store/${formData.year}`);
+      const response = await fetch(`http://localhost:3030/api/add/${formData.category.toLowerCase()}/fetch/store/${formData.year}`);
       const jsonData = await response.json();
 
       setData(jsonData);
+      calculateGrandTotal(jsonData);
+
+      console.log(jsonData);
       setLoading(false);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -42,6 +53,7 @@ const AnuallyReports = () => {
     // Handle form submission here if needed
   };
 console.log(data)
+console.log(formData.category)
   return (
     <>
       <Navbar />
@@ -93,13 +105,18 @@ console.log(data)
         {loading ? (
   <p>Loading...</p>
 ) : (
+  
   <div className="inventory-table">
     <div className="table-header-anual">
       <div className="table-column">Item Name</div>
       <div className="table-column">Item Category</div>
       <div className="table-column">Purchase Date</div>
       <div className="table-column">Quantity</div>
+      <div className="table-column">Supplier Quantity</div>
+      <div className="table-column">Supplier Name</div>
       <div className="table-column">Unit Cost</div>
+      <div className="table-column">Unit Measurement</div>
+      <div className="table-column">Condition</div>
       <div className="table-column">Total Cost</div>
     </div>
     {data.map(item => (
@@ -108,10 +125,19 @@ console.log(data)
         <div className="table-row">{item.itemCategory}</div>
         <div className="table-row">{item.purchaseDate ? new Date(item.purchaseDate).toLocaleDateString() : ''}</div>
         <div className="table-row">{item.quantity}</div>
+        <div className="table-row">{item.supplierContact}</div>
+        <div className="table-row">{item.supplierName}</div>
+
         <div className="table-row">{item.unitCost}</div>
+        <div className="table-row">{item.unitMeasurement}</div>
+        <div className="table-row">{item.condition}</div>
+
         <div className="table-row">{item.quantity * item.unitCost}</div>
       </div>
     ))}
+    <div className="grand-total">
+          <h2>Grand Total Cost Spent in {formData.year}: Rs.{grandTotal}</h2>
+        </div>
   </div>
 )}
 

@@ -42,11 +42,15 @@
     background-color: #6278f5;
     color:white;
     position: sticky;
-    width: 700px;
+    min-width:1200px;
     
   }
 
   .inventory-table{
     margin-left:auto;
     margin-right: auto;
+  }
+  .table-col{
+    width:200px !important ;
+    border-style: solid;
   }

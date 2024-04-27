@@ -18,18 +18,31 @@ const ManageDeptForm = () => {
     fetchDepartmentData();
   }, []);
 
+  // const fetchDepartmentData = async () => {
+  //   try {
+  //     const response = await fetch('https://ims-server-63af.onrender.com/api/departments');
+  //     const data = await response.json();
+  //     // Extract department names
+  //     const departmentNames = data.map(department => department.departmentName);
+  //     setDepartmentOptions(departmentNames);
+  //     setDepartmentData(data);
+  //   } catch (error) {
+  //     console.error('Error fetching department data:', error);
+  //   }
+  // };
   const fetchDepartmentData = async () => {
     try {
       const response = await fetch('https://ims-server-63af.onrender.com/api/departments');
       const data = await response.json();
-      // Extract department names
-      const departmentNames = data.map(department => department.departmentName);
-      setDepartmentOptions(departmentNames);
+      // Extract unique department names
+      const uniqueDepartmentNames = [...new Set(data.map(department => department.departmentName))];
+      setDepartmentOptions(uniqueDepartmentNames);
       setDepartmentData(data);
     } catch (error) {
       console.error('Error fetching department data:', error);
     }
   };
+  
 
   const deleteDepartment = async (id) => {
     try {

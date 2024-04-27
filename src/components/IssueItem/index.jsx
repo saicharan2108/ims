@@ -6,21 +6,34 @@ const IssueItem = () => {
   const [formData, setFormData] = useState({
     storeType: '',
     itemName: '',
-    departmentName: '', // Change departmentName field to an empty string
+    departmentName: '',
     room: '',
+    unitIn:'',
     quantity: '',
     date: ''
   });
   const [itemNames, setItemNames] = useState([]);
+  const [departments, setDepartments] = useState([]);
+  const [rooms, setRooms] = useState([]);
 
   useEffect(() => {
     fetchItemNames();
+    fetchDepartments();
   }, [formData.storeType]);
+
+  useEffect(() => {
+    if (formData.departmentName) {
+      const selectedDepartment = departments.find(department => department.departmentName === formData.departmentName);
+      if (selectedDepartment) {
+        setRooms(selectedDepartment.rooms);
+      }
+    }
+  }, [formData.departmentName, departments]);
 
   const fetchItemNames = async () => {
     if (formData.storeType) {
       try {
-        const response = await fetch(`https://ims-server-63af.onrender.com/api/add/${formData.storeType.toLowerCase()}/store`);
+        const response = await fetch(`http://localhost:3030/api/add/${formData.storeType.toLowerCase()}/store`);
         if (response.ok) {
           const data = await response.json();
           setItemNames(data);
@@ -33,6 +46,24 @@ const IssueItem = () => {
     }
   };
 
+  const fetchDepartments = async () => {
+    try {
+      const response = await fetch('http://localhost:3030/api/departments');
+      if (response.ok) {
+        const data = await response.json();
+        const uniqueDepartments = [...new Set(data.map(department => department.departmentName))];
+        setDepartments(uniqueDepartments.map(departmentName => ({
+          departmentName: departmentName,
+          rooms: data.filter(department => department.departmentName === departmentName).map(department => department.roomNo)
+        })));
+      } else {
+        console.error('Failed to fetch departments:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error fetching departments:', error);
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -41,54 +72,70 @@ const IssueItem = () => {
     }));
   };
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  // Find the selected item object from itemNames state
-  const selectedItem = itemNames.find(item => item._id === formData.itemName);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
   
-  // Calculate the updated quantity by subtracting the issued quantity from the current quantity
-  const updatedQuantity = selectedItem.quantity - parseInt(formData.quantity);
-
-  // Update the formData object to include the updatedQuantity
-  const updatedFormData = {
-    ...formData,
-    updatedQuantity: updatedQuantity, // Updated quantity
-  };
-
-  try {
-    // Call the update API to decrease the quantity based on the ID
-    await fetch(`https://ims-server-63af.onrender.com/api/update/${formData.storeType.toLowerCase()}/${formData.itemName}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ quantity: updatedQuantity }),
-    });
-
-    // Post the issued data to the new database
-    const response = await fetch('https://ims-server-63af.onrender.com/api/issue/store', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updatedFormData), // Send updatedFormData
-    });
+    // Find the selected item object from itemNames state
+    const selectedItem = itemNames.find(item => item._id === formData.itemName);
     
-    if (response.ok) {
-      const data = await response.json();
-      console.log('Issue created successfully:', data);
-      alert('Issue created successfully');
-    } else {
-      console.error('Failed to create issue:', response.statusText);
-      alert('Failed to create issue');
+    // Check if the issued quantity is greater than the available quantity
+    if (parseInt(formData.quantity) > selectedItem.quantity) {
+      alert('Insufficient stock!');
+      return;
     }
-  } catch (error) {
-    console.error('Error creating issue:', error);
-    alert('Error creating issue');
-  }
-};
-
+  
+    // Calculate the updated quantity by subtracting the issued quantity from the current quantity
+    const updatedQuantity = selectedItem.quantity - parseInt(formData.quantity);
+  
+    // Update the formData object to include the updatedQuantity
+    const updatedFormData = {
+      ...formData,
+      updatedQuantity: updatedQuantity, // Updated quantity
+      itemCategory: selectedItem.itemCategory,
+      unitMeasurement: selectedItem.unitMeasurement,
+      purchaseDate: selectedItem.purchaseDate,
+      unitCost: selectedItem.unitCost,
+      totalCost: selectedItem.totalCost,
+      condition: selectedItem.condition,
+      warranty: selectedItem.warranty,
+      supplierName: selectedItem.supplierName,
+      supplierAddress: selectedItem.supplierAddress,
+      supplierContact: selectedItem.supplierContact
+    };
+  
+    try {
+      // Call the update API to decrease the quantity based on the ID
+      await fetch(`https://ims-server-63af.onrender.com/api/update/${formData.storeType.toLowerCase()}/${formData.itemName}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ quantity: updatedQuantity }),
+      });
+  
+      // Post the issued data to the new database
+      const response = await fetch('https://ims-server-63af.onrender.com/api/issue/store', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedFormData), // Send updatedFormData
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Issue created successfully:', data);
+        alert('Issue created successfully');
+      } else {
+        console.error('Failed to create issue:', response.statusText);
+        alert('Failed to create issue');
+      }
+    } catch (error) {
+      console.error('Error creating issue:', error);
+      alert('Error creating issue');
+    }
+  };
+  
   return (
     <>
       <Navbar />
@@ -120,17 +167,35 @@ const IssueItem = () => {
               </select>
             </div>
           )}
-          <div className="create-task-form-input">
-            <label htmlFor="room">Room:</label>
-            <input type="text" id="room" name="room" value={formData.room} onChange={handleChange} className="task-input-field" />
-          </div>
+          {formData.storeType && (
+            <div className="create-task-form-input">
+              <label htmlFor="departmentName">Select Department:</label>
+              <select id="departmentName" name="departmentName" value={formData.departmentName} onChange={handleChange} className="task-input-field">
+                <option value="">Select Department</option>
+                {departments.map((department) => (
+                  <option key={department.departmentName} value={department.departmentName}>{department.departmentName}</option>
+                ))}
+              </select>
+            </div>
+          )}
+          {formData.departmentName && (
+            <div className="create-task-form-input">
+              <label htmlFor="room">Room:</label>
+              <select id="room" name="room" value={formData.room} onChange={handleChange} className="task-input-field">
+                <option value="">Select Room</option>
+                {rooms.map((room) => (
+                  <option key={room} value={room}>{room}</option>
+                ))}
+              </select>
+            </div>
+          )}
           <div className="create-task-form-input">
             <label htmlFor="quantity">Quantity:</label>
             <input type="number" id="quantity" name="quantity" value={formData.quantity} onChange={handleChange} className="task-input-field" />
           </div>
           <div className="create-task-form-input">
-            <label htmlFor="departmentName">Department:</label>
-            <input type="text" id="departmentName" name="departmentName" value={formData.departmentName} onChange={handleChange} className="task-input-field" />
+            <label htmlFor="unitIn">Unit In</label>
+            <input type="text" id="unitIn" name="unitIn" value={formData.unitIn} onChange={handleChange} className="task-input-field" placeholder='Ex: Kg, Ltr'/>
           </div>
           <div className="create-task-form-input">
             <label htmlFor="date">Date:</label>

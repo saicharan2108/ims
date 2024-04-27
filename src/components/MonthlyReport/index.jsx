@@ -120,21 +120,30 @@ const MonthlyReport = () => {
         ) : (
           <div className="inventory-table">
             <div className="table-header-monthly">
-              <div className="table-column">Item Name</div>
-              <div className="table-column">Item Category</div>
-              <div className="table-column">Purchase Date</div>
-              <div className="table-column">Quantity</div>
-              <div className="table-column">Unit Cost</div>
-              <div className="table-column">Total Cost</div>
+            <div className="table-column">Item Name</div>
+      <div className="table-column">Item Category</div>
+      <div className="table-column">Purchase Date</div>
+      <div className="table-column">Quantity</div>
+      <div className="table-column">Supplier Quantity</div>
+      <div className="table-column">Supplier Name</div>
+      <div className="table-column">Unit Cost</div>
+      <div className="table-column">Unit Measurement</div>
+      <div className="table-column">Condition</div>
+      <div className="table-column">Total Cost</div>
             </div>
             {data.map(item => (
               <div key={item._id} className="table-row-container">
-                <div className="table-row">{item.itemName}</div>
-                <div className="table-row">{item.itemCategory}</div>
-                <div className="table-row">{item.purchaseDate ? new Date(item.purchaseDate).toLocaleDateString() : ''}</div>
-                <div className="table-row">{item.quantity}</div>
-                <div className="table-row">{item.unitCost}</div>
-                <div className="table-row">{item.unitCost * item.quantity}</div>
+              <div className="table-row">{item.itemName}</div>
+
+              <div className="table-row">{item.itemCategory}</div>
+        <div className="table-row">{item.purchaseDate ? new Date(item.purchaseDate).toLocaleDateString() : ''}</div>
+        <div className="table-row">{item.quantity}</div>
+        <div className="table-row">{item.supplierContact}</div>
+        <div className="table-row">{item.supplierName}</div>
+        <div className="table-row">{item.unitCost}</div>
+        <div className="table-row">{item.unitMeasurement}</div>
+        <div className="table-row">{item.condition}</div>
+        <div className="table-row">{item.quantity * item.unitCost}</div>
               </div>
             ))}
           </div>

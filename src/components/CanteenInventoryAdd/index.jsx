@@ -8,6 +8,7 @@ const CanteenInventoryAdd = () => {
     itemCategory: '',
     quantity: '',
     unitPrice: '',
+    unitIn:'',
     purchaseDate: '',
     supplierName: '',
     supplierAddress: '',
@@ -44,6 +45,7 @@ const CanteenInventoryAdd = () => {
           itemCategory: '',
           quantity: '',
           unitPrice: '',
+          unitIn:'',
           purchaseDate: '',
           supplierName: '',
           supplierAddress: '',
@@ -77,6 +79,10 @@ const CanteenInventoryAdd = () => {
           <div className="create-task-form-input">
             <label htmlFor="quantity">Quantity:</label>
             <input type="number" id="quantity" name="quantity" value={formData.quantity} onChange={handleChange} className="task-input-field" />
+          </div>
+          <div className="create-task-form-input">
+            <label htmlFor="quantity">Unit In:</label>
+            <input type="text" id="unitIn" name="unitIn" value={formData.unitIn} onChange={handleChange} className="task-input-field" placeholder='Ex: kg, ltr'/>
           </div>
           <div className="create-task-form-input">
             <label htmlFor="unitPrice">Unit Price:</label>

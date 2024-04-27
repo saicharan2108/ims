@@ -8,8 +8,38 @@ const Alerts = () => {
   const [inventoryData, setInventoryData] = useState([]);
 
   useEffect(() => {
-    fetchInventoryData();
+    fetchDataFromAllApis();
   }, []);
+
+  const fetchDataFromAllApis = async () => {
+    try {
+      // Fetch data from three different APIs
+      const api1Data = await fetchInventoryData('department');
+      const api2Data = await fetchInventoryData('canteen');
+      const api3Data = await fetchInventoryData('lab');
+
+      // Merge the data from all APIs
+      const mergedData = [...api1Data, ...api2Data, ...api3Data];
+
+      // Filter items with quantity less than 5
+      const filteredData = mergedData.filter(item => parseInt(item.quantity) < 5);
+      
+      setInventoryData(filteredData);
+    } catch (error) {
+      console.error('Error fetching inventory data:', error);
+    }
+  };
+
+  const fetchInventoryData = async (api) => {
+    try {
+      const response = await fetch(`http://localhost:3030/api/add/${api}/store`);
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error(`Error fetching data from ${api}:`, error);
+      return [];
+    }
+  };
 
   const handleDelete = async (itemName) => {
     try {
@@ -19,24 +49,12 @@ const Alerts = () => {
       if (response.ok) {
         // Update inventory data after successful deletion
         alert("Transaction deleted successfully")
-        fetchInventoryData();
+        fetchDataFromAllApis();
       } else {
         console.error('Error deleting inventory items');
       }
     } catch (error) {
       console.error('Error deleting inventory items:', error);
-    }
-  };
-
-  const fetchInventoryData = async () => {
-    try {
-      const response = await fetch('https://ims-server-63af.onrender.com/add/department/store');
-      const data = await response.json();
-      // Filter items with quantity less than 5
-      const filteredData = data.filter(item => parseInt(item.quantity) < 5);
-      setInventoryData(filteredData);
-    } catch (error) {
-      console.error('Error fetching inventory data:', error);
     }
   };
 
